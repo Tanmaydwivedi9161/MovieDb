@@ -48,13 +48,13 @@ const Navbar = () => {
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleSearch()}
           />
-          <button className="searchbtn" onClick={handleSearch}>
+          <button className="searchbtn" type="button" onClick={handleSearch}>
             Search
           </button>
         </div>
       </div>
 
-      <button className="mobile-toggle" onClick={toggleMenu}>
+      <button className="mobile-toggle" type="button" onClick={toggleMenu}>
         {mobileMenuOpen ? <p>Times</p> : <p>Bars</p>}
       </button>
     </div>

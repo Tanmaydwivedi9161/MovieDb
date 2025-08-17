@@ -3,12 +3,12 @@ import MovieCard from '../../components/MovieCard/MovieCard'
 
 const Upcoming = () => {
   const [movies, setMovies] = useState([])
-
-  const API_URL =
-    'https://api.themoviedb.org/3/movie/upcoming?api_key=15909111386dbfc15ce4da84fd53981f&language=en-US&page=1'
-  const TOKEN = process.env.TMDB_TOKEN
+  const [page, setPage] = useState(1) // pagination state
+  const TOKEN = process.env.REACT_APP_TMDB_TOKEN
 
   useEffect(() => {
+    const API_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=15909111386dbfc15ce4da84fd53981f&language=en-US&page=${page}`
+
     fetch(API_URL, {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -16,9 +16,9 @@ const Upcoming = () => {
       },
     })
       .then(res => res.json())
-      .then(data => setMovies(data.results))
+      .then(data => setMovies(data.results || []))
       .catch(err => console.error('Error fetching movies:', err))
-  }, [])
+  }, [page])
 
   return (
     <div className="home-container">
@@ -33,6 +33,21 @@ const Upcoming = () => {
             rating={movie.vote_average}
           />
         ))}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button
+          type="button"
+          disabled={page === 1}
+          onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+        >
+          Prev
+        </button>
+        <span>Page {page}</span>
+        <button type="button" onClick={() => setPage(prev => prev + 1)}>
+          Next
+        </button>
       </div>
     </div>
   )
