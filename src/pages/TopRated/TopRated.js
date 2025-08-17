@@ -44,7 +44,7 @@ const TopRated = () => {
         >
           Prev
         </button>
-        <span>Page {page}</span>
+        <p>{page}</p>
         <button type="button" onClick={() => setPage(prev => prev + 1)}>
           Next
         </button>

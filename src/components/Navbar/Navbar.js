@@ -23,7 +23,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="leftside">
         <Link to="/" className="link">
-          <h1 className="logo">MovieDB</h1>
+          <h1 className="logo">movieDB</h1>
         </Link>
       </div>
 
